@@ -17,4 +17,3 @@ with smtplib.SMTP("YOUR EMAIL PROVIDER SMTP SERVER ADDRESS") as connection:
         to_addrs=MY_EMAIL,
         msg=f"Subject:Greetings!\n\n{contents}"
     )
-    )
