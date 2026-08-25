@@ -7,18 +7,18 @@ from email.message import EmailMessage
 # SETTINGS
 # ==========================================
 
-TARGET_EUR = 350.00
-CHECK_EVERY = 60  # Check every 60 seconds
-
 # Your Gmail address
-EMAIL_SENDER = "dmjdstockinfo@gmail.com"
+#EMAIL_SENDER = "dmjdstockinfo@gmail.com"
 
 # Where you want to receive the alert
-EMAIL_RECEIVER = "dmjdstockinfo@gmail.com"
+#EMAIL_RECEIVER = "dmjdstockinfo@gmail.com"
 
 # Gmail App Password
-EMAIL_PASSWORD = "agsd ruxv iaou zrfr"
+#EMAIL_PASSWORD = "agsd ruxv iaou zrfr"
 
+# import os and use it to get the Github repository secrets
+EMAIL_SENDER = os.environ.get("MY_EMAIL")
+EMAIL_PASSWORD = os.environ.get("MY_PASSWORD")
 
 # ---------- CONFIG ----------
 STOCKS = {
@@ -41,7 +41,7 @@ def send_email(alerts):
     msg = EmailMessage()
     msg["Subject"] = "Stock Price Alert"
     msg["From"] = EMAIL_SENDER
-    msg["To"] = EMAIL_RECEIVER
+    msg["To"] = EMAIL_SENDER
 
     body = "The following stocks are below their alert prices:\n\n"
     for alert in alerts:
