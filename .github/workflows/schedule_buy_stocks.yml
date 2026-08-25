@@ -1,4 +1,4 @@
-name: Test Setup
+name: Dly Sched Buy Stock Alert
 
 on:
   workflow_dispatch:  # Manual trigger only
