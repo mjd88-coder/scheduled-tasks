@@ -1,7 +1,23 @@
-name: Dly Sched Buy Stock Alert
+name: Schedule Daily Buy Stock Alert
 
 on:
-  workflow_dispatch:  # Manual trigger only
+  schedule:
+    # ╔═══════════════════════════════════════════════════════════════╗
+    # ║  CHANGE THE LINE BELOW to set when your script runs          ║
+    # ║                                                                ║
+    # ║  Format:  'MINUTE HOUR * * *'                                  ║
+    # ║                                                                ║
+    # ║  Examples:                                                     ║
+    # ║    '0 9 * * *'   = 9:00 AM UTC daily                          ║
+    # ║    '30 14 * * *' = 2:30 PM UTC daily                          ║
+    # ║    '0 0 * * *'   = Midnight UTC daily                         ║
+    # ║                                                                ║
+    # ║  Use https://time.is/UTC to find your local time in UTC       ║
+    # ╚═══════════════════════════════════════════════════════════════╝
+    - cron: '0 13 * * *'
+
+  # This adds a "Run workflow" button so you can test manually
+  workflow_dispatch:
 
 jobs:
   test:
@@ -49,8 +65,8 @@ jobs:
         run: |
           echo "Checking for required files..."
 
-          if [ -f "stock_alert_cloud.py" ]; then
-            echo "stock_alert_cloud.py found"
+          if [ -f "buy_stock_alert_cloud.py" ]; then
+            echo "buy_stock_alert_cloud.py found"
           else
             echo "stock_alert_cloud.py not found!"
             exit 1
@@ -73,8 +89,7 @@ jobs:
         run: |
           echo ""
           echo "========================================"
-          echo "  All checks passed!"
-          echo "  Your setup is ready to go."
+          echo "  Your setup passed!"
           echo "========================================"
 
       - name: Run script
