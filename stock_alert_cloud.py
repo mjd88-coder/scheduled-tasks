@@ -2,7 +2,7 @@ import time
 import yfinance as yf
 import smtplib
 from email.message import EmailMessage
-
+import os
 # ==========================================
 # SETTINGS
 # ==========================================
