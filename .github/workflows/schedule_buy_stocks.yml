@@ -83,7 +83,7 @@ jobs:
           echo "All required files found!"
 
       - name: Test Python syntax
-        run: python -m py_compile main.py && echo "Python syntax OK"
+        run: python -m py_compile buy_stock_alert_cloud.py && echo "Python syntax OK"
 
       - name: Success
         run: |
