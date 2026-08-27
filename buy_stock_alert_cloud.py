@@ -10,7 +10,7 @@ import os
 # Your Sender Gmail address and password are set in github as secrets
 
 # Where you want to receive the alert
-EMAIL_RECEIVER = "dmjdstockinfo@gmail.com"
+EMAIL_RECEIVER = "mercyjean.diaz@gmail.com"
 
 # import os and use it to get the Github repository secrets
 EMAIL_SENDER = os.environ.get("MY_EMAIL")
