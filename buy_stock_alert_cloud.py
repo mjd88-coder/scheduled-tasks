@@ -7,14 +7,10 @@ import os
 # SETTINGS
 # ==========================================
 
-# Your Gmail address
-#EMAIL_SENDER = "dmjdstockinfo@gmail.com"
+# Your Sender Gmail address and password are set in github as secrets
 
 # Where you want to receive the alert
 #EMAIL_RECEIVER = "dmjdstockinfo@gmail.com"
-
-# Gmail App Password
-#EMAIL_PASSWORD = "agsd ruxv iaou zrfr"
 
 # import os and use it to get the Github repository secrets
 EMAIL_SENDER = os.environ.get("MY_EMAIL")
@@ -41,7 +37,7 @@ def send_email(alerts):
     msg = EmailMessage()
     msg["Subject"] = "BUY Stock Alert"
     msg["From"] = EMAIL_SENDER
-    msg["To"] = EMAIL_SENDER
+    msg["To"] = EMAIL_RECEIVER
 
     body = "The following stocks are below their alert prices:\n\n"
     for alert in alerts:
