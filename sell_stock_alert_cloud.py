@@ -29,12 +29,27 @@ EMAIL_PASSWORD = os.environ.get("MY_PASSWORD")
 def load_stocks(filename):
     stocks = []
 
-    with open(filename, mode="r", newline="", encoding="utf-8") as file:
+    with open(filename, mode="r", newline="", encoding="utf-8-sig") as file:
         reader = csv.DictReader(file)
 
+        # Clean column names
+        reader.fieldnames = [
+            field.strip().lower()
+            for field in reader.fieldnames
+        ]
+
+        print("CSV columns found:", reader.fieldnames)
+
         for row in reader:
-            symbol = row["symbol"].strip().upper()
-            company = row["company"].strip()
+
+            # Clean values
+            row = {
+                key.strip().lower(): value.strip()
+                for key, value in row.items()
+            }
+
+            symbol = row["symbol"].upper()
+            company = row["company"]
             buyingprice = float(row["buyingprice"])
             targetsellingpercentage = float(
                 row["targetsellingpercentage"]
