@@ -26,44 +26,162 @@ EMAIL_PASSWORD = os.environ.get("MY_PASSWORD")
 # LOAD STOCKS
 # ==========================================
 
+# ==========================================
+# LOAD STOCKS
+# ==========================================
+
 def load_stocks(filename):
     stocks = []
 
-    with open(filename, mode="r", newline="", encoding="utf-8-sig") as file:
+    with open(
+        filename,
+        mode="r",
+        newline="",
+        encoding="utf-8-sig"
+    ) as file:
+
         reader = csv.DictReader(file)
 
+        # --------------------------------------
         # Clean column names
+        # --------------------------------------
+
+        if reader.fieldnames is None:
+            raise ValueError("CSV file has no header row.")
+
         reader.fieldnames = [
-            field.strip().lower()
+            field.strip().lower() if field else None
             for field in reader.fieldnames
         ]
 
         print("CSV columns found:", reader.fieldnames)
 
-        for row in reader:
+        # --------------------------------------
+        # Required columns
+        # --------------------------------------
 
-            # Clean values
-            row = {
-                key.strip().lower(): value.strip()
-                for key, value in row.items()
-            }
+        required_columns = {
+            "symbol",
+            "company",
+            "buyingprice",
+            "targetsellingpercentage"
+        }
 
-            symbol = row["symbol"].upper()
-            company = row["company"]
-            buyingprice = float(row["buyingprice"])
-            targetsellingpercentage = float(
-                row["targetsellingpercentage"]
+        actual_columns = {
+            field for field in reader.fieldnames
+            if field
+        }
+
+        missing_columns = required_columns - actual_columns
+
+        if missing_columns:
+            raise ValueError(
+                "Missing required CSV columns: "
+                + ", ".join(sorted(missing_columns))
             )
+
+        # --------------------------------------
+        # Read rows
+        # --------------------------------------
+
+        for row_number, row in enumerate(reader, start=2):
+
+            # Skip completely empty rows
+            if not row or all(
+                value is None or not str(value).strip()
+                for value in row.values()
+            ):
+                continue
+
+            # ----------------------------------
+            # Clean row values
+            # ----------------------------------
+
+            cleaned_row = {}
+
+            for key, value in row.items():
+
+                # Ignore columns without a name
+                if key is None:
+                    continue
+
+                # Ignore empty values safely
+                if value is None:
+                    value = ""
+
+                cleaned_row[key.strip().lower()] = value.strip()
+
+            # ----------------------------------
+            # Check required values
+            # ----------------------------------
+
+            try:
+
+                symbol = cleaned_row["symbol"].upper()
+                company = cleaned_row["company"]
+
+                buyingprice = float(
+                    cleaned_row["buyingprice"]
+                )
+
+                targetsellingpercentage = float(
+                    cleaned_row["targetsellingpercentage"]
+                )
+
+            except KeyError as e:
+
+                print(
+                    f"ERROR in CSV row {row_number}: "
+                    f"Missing column {e}"
+                )
+                continue
+
+            except ValueError as e:
+
+                print(
+                    f"ERROR in CSV row {row_number}: "
+                    f"Invalid number: {e}"
+                )
+                continue
+
+            # ----------------------------------
+            # Validate values
+            # ----------------------------------
+
+            if not symbol:
+                print(
+                    f"WARNING: Empty symbol in row "
+                    f"{row_number}. Skipping."
+                )
+                continue
+
+            if not company:
+                print(
+                    f"WARNING: Empty company in row "
+                    f"{row_number}. Skipping."
+                )
+                continue
+
+            if buyingprice <= 0:
+                print(
+                    f"WARNING: Invalid buying price for "
+                    f"{symbol} in row {row_number}. Skipping."
+                )
+                continue
+
+            # ----------------------------------
+            # Add stock
+            # ----------------------------------
 
             stocks.append({
                 "symbol": symbol,
                 "company": company,
                 "buyingprice": buyingprice,
-                "targetsellingpercentage": targetsellingpercentage
+                "targetsellingpercentage":
+                    targetsellingpercentage
             })
 
     return stocks
-
 
 # ==========================================
 # LOAD EMAIL RECEIVERS
