@@ -1,10 +1,10 @@
-symbol,company,threshold
-GOOGL,Alphabet Inc,270,15
-MSFT,Microsoft,350,20
-AMZN,Amazon.com Inc,200,15
-META,Meta Platforms Inc,500,15
-TSLA,Tesla,300,15
-AAL,American Airlines Group Inc,13,15
-SZU.DE,Südzucker AG AB,12.86,15
+symbol,company,buyingprice
+GOOGL,Alphabet Inc,270
+MSFT,Microsoft,350
+AMZN,Amazon.com Inc,200
+META,Meta Platforms Inc,500
+TSLA,Tesla,300
+AAL,American Airlines Group Inc,13
+SZU.DE,Südzucker AG AB,11.60
 
 
