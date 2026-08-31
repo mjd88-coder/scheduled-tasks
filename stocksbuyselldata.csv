@@ -1,0 +1,4 @@
+symbol,company,buyingprice, targetsellingpercentage
+NVDA,NVIDIA,150,15
+TSLA,Tesla,400,15
+MSFT,Microsoft,350,20
