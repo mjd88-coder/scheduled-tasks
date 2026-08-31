@@ -1,4 +1,20 @@
 symbol,company,buyingprice, targetsellingpercentage
-NVDA,NVIDIA,150,15
-TSLA,Tesla,400,15
+NVDA,NVIDIA,168.57,15
+GOOGL,Alphabet Inc.,270,15
+AAPL, Apple Inc, 308.03,15
 MSFT,Microsoft,350,20
+AMZN,Amazon.com, Inc,200,15
+META,Meta Platforms, Inc,500,15
+TSLA,Tesla,300,15
+
+GRAB,Grab Holdings Limited,3.62,15
+SAP,SAP SE,234.08,15
+NFLX,Netflix, Inc,95.86,15
+HFG.DE,HelloFresh SE,7.09,15
+BDT.DE,Bertrandt Aktiengesellschaft,29.08,15
+UN0.DE,Uniper SE,195.81,15
+PCELL.ST,PowerCell Sweden AB,17.41,15
+
+
+SZU.DE,Südzucker AG AB,12.86,15
+AAL,American Airlines Group Inc,13,15
