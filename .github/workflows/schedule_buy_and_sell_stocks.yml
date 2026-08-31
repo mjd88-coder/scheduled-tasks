@@ -105,4 +105,4 @@ jobs:
           # Add more secrets in Settings > Secrets > Actions
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
           MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
-        run: buyandsell_stocks_alert_cloud.py
+        run: python buyandsell_stocks_alert_cloud.py
