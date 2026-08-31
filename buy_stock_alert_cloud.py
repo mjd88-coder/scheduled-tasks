@@ -35,12 +35,12 @@ def load_stocks(filename):
         for row in reader:
             symbol = row["symbol"].strip().upper()
             company = row["company"].strip()
-            buyingprice = float(row["buyingprice"])
+            threshold = float(row["threshold"])
 
             stocks.append({
                 "symbol": symbol,
                 "company": company,
-                "buyingprice": buyingprice
+                "threshold": threshold
             })
 
     return stocks
@@ -151,7 +151,7 @@ if __name__ == "__main__":
 
         symbol = stock["symbol"]
         company = stock["company"]
-        buyingprice = stock["buyingprice"]
+        threshold = stock["threshold"]
 
         try:
 
@@ -164,22 +164,19 @@ if __name__ == "__main__":
             print(
                 f"{symbol} ({company}): "
                 f"${price:.2f} "
-                f"| Target: ${buyingprice:.2f}"
+                f"| Target: ${threshold:.2f}"
             )
 
-            # ==================================
+            # --------------------------------
             # BUY ALERT
-            # ==================================
+            # --------------------------------
 
-            if price < buyingprice:
-                buy_alerts.append(
-                    f"{symbol} ({company})\n"
-                    f"Current price: ${price:.2f}\n"
-                    f"Buying price: ${buyingprice:.2f}\n"
-                    f"Price difference: "
-                    f"${buyingprice - price:.2f} below buying price\n"
-                    f"Potential discount: "
-                    f"{((buyingprice - price) / buyingprice) * 100:.2f}%\n"
+            if price < threshold:
+
+                alerts.append(
+                    f"{symbol} ({company}) "
+                    f"is ${price:.2f} "
+                    f"(below target ${threshold:.2f})"
                 )
 
         except Exception as e:
