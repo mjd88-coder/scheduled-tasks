@@ -1,11 +1,9 @@
 symbol,company,buyingprice
-GOOGL,Alphabet Inc,270
-MSFT,Microsoft,350
-AMZN,Amazon.com Inc,200
-META,Meta Platforms Inc,500
-TSLA,Tesla,300
-SZU.DE,Südzucker AG AB,11.00
-AAL,American Airlines Group Inc,12.00
-
-
-
+GOOGL,Alphabet Inc,270.0
+MSFT,Microsoft,350.0
+AMZN,Amazon.com Inc,200.0
+META,Meta Platforms Inc,500.0
+TSLA,Tesla,300.0
+SZU.DE,Südzucker AG AB,11.2
+PCG,PG&E - Pacific Gas and Electric Company,12.6
+TSM,Taiwan Semiconductor Manufacturing Company Limited (TSM),370.0
